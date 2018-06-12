@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import {create} from 'react-test-renderer';
 import App from './App';
 
 it('renders without crashing', () => {
@@ -7,3 +8,11 @@ it('renders without crashing', () => {
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
+it('renders correctly', () => {
+  const component = create(
+    <App />
+  );
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+})
